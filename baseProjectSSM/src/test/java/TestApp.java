@@ -1,10 +1,13 @@
-import edu.cczu.domain.User;
-import edu.cczu.service.UserService;
+import edu.cczu.base.domain.admin.User;
+import edu.cczu.base.service.admin.IUserService;
+import edu.cczu.base.utils.MD5Util;
+import edu.cczu.base.utils.UUIDUtil;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @author iceorangeduxiaocheng@aliyun.com
@@ -18,8 +21,19 @@ public class TestApp {
                             ,"spring-service.xml", "spring-tx.xml"};
 
         ApplicationContext ctx = new ClassPathXmlApplicationContext(resources);
-        UserService userService = ctx.getBean("userService", UserService.class);
-        List<User> users = userService.queryAllInfo();
-        System.out.println(users);
+        IUserService userService = ctx.getBean("userService", IUserService.class);
+        User user = new User();
+        user.setId(UUIDUtil.getUUID());
+        user.setUsername("SMITH");
+        user.setPassword(MD5Util.getMD5("123"));
+        user.setPhone("19802676240");
+        user.setAge("22");
+        user.setEmail("iceorangeduxiaocheng@aliyun.com");
+        user.setGender("1");
+        user.setPhoto(null);
+        user.setAddress("New_York");
+        Integer result = userService.registerUser(user);
+        System.out.println(result);
     }
+
 }

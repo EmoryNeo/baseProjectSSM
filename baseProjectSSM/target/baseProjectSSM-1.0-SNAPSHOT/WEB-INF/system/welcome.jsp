@@ -11,6 +11,6 @@
     <base href="<%=basePath%>" />
 </head>
 <body>
-    welCome page!
+    Welcome Page!
 </body>
 </html>

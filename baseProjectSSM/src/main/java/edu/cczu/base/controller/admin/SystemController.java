@@ -38,10 +38,16 @@ public class SystemController {
         this.userService = userService;
     }
 
+    // 跳转到登录页面
+    @RequestMapping(value = "/to_login.do")
+    public String comeToLogin(){
+        return "/WEB-INF/system/login.jsp";
+    }
+
     // 跳转到欢迎页面
     @RequestMapping(value = "/to_welcome.do")
     public String comeToWelcome(){
-        return "welcome";
+        return "/WEB-INF/system/welcome.jsp";
     }
 
     /* 登录 */
@@ -88,7 +94,7 @@ public class SystemController {
         map.put("type", "200");
         map.put("msg", "登录成功");
         // 登录成功之后，应该将用户信息放入session中
-        session.setAttribute("user", processUsername);
+        session.setAttribute("admin", processUsername);
         return map;
     }
 

@@ -5,6 +5,20 @@
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
+    <!-- Register Interceptors -->
+    <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/admin/**" />
+            <mvc:mapping path="/system/**" />
+            <mvc:mapping path="/menu/**" />
+            <mvc:exclude-mapping path="/system/login.do" />
+            <mvc:exclude-mapping path="/system/to_login.do" />
+            <mvc:exclude-mapping path="/system/get_verification_code.do" />
+            <mvc:exclude-mapping path="/resources/**" />
+            <bean class="edu.cczu.base.interceptors.admin.LoginInterceptor" />
+        </mvc:interceptor>
+    </mvc:interceptors>
+
     <!--ComponentScan：scan edu.cczu.base.controller-->
     <context:component-scan base-package="edu.cczu.base.controller" />
 
@@ -12,8 +26,8 @@
     <mvc:annotation-driven />
 
     <!-- InternalResourceViewResolver -->
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/system/" />
-        <property name="suffix" value=".jsp" />
-    </bean>
+<!--    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
+<!--        <property name="prefix" value="/WEB-INF/system/" />-->
+<!--        <property name="suffix" value=".jsp" />-->
+<!--    </bean>-->
 </beans>
